@@ -1,0 +1,64 @@
+.App {
+  text-align: center;
+  /* background-color: rgb(212, 182, 182); */
+}
+
+html, body {
+  margin: 0%;
+  padding: 0%;
+  background-color: rgb(182, 205, 212);
+}
+.displayarea-wrapper {
+  /* border: 2px solid red; */
+}
+
+.displayarea {
+  padding: 0%;
+  border: 0px;
+  resize: none;
+  width: 95%;
+  height: 500px;
+  font-size: 12px;
+  border: 3px solid rgb(74, 119, 216);
+  background-color: black;
+  color: white;
+  padding: 13px;
+  
+  font-family: 'Roboto Mono', monospace;
+}
+
+.description {
+  color: rebeccapurple;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+}
+
+.button {
+  display: inline-block;
+  margin-left: 4px;
+  border: 1px solid rebeccapurple;
+  border-radius: 3px;
+  height: 30px;
+  width: 70px;
+  background-color: white;
+  transition-duration: 0.2s;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.query-input {
+  font-family: 'Roboto Mono', monospace;
+  margin: 0px 5px;
+  width: 300px;
+  height: 24px;
+}
+
+.break {
+  border: 1px solid rgb(71, 67, 67);
+  display: block;
+  margin: 15px 0px;
+}
