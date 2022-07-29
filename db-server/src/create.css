@@ -1,0 +1,11 @@
+.create-wrapper {
+
+}
+
+.create-input {
+    color: red;
+}
+
+.not-blank::placeholder {
+    color: red;
+}
