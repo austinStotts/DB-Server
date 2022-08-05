@@ -3,27 +3,33 @@ import Axios from "axios";
 import "../create.css";
 
 import validate from './validate';
+import ErrorPopUp from './errorPopUp';
+import Break from '../components/break';
+import LiveString from './liveString';
 
 
 class Create extends Component {
     constructor () {
         super()
         this.state = {
-            name:"",
-            showid:"",
-            url:"",
-            promo:"",
-            banner:"",
-            description: "",
-            year:"",
-            studio:"",
-            episodes:"",
-            tags: "",
-            score: "",
-            status: "",
-            native: "",
-            season: "",
-            public: ""
+            show: {
+                name:"",
+                showid:"",
+                url:"",
+                promo:"",
+                banner:"",
+                description: "",
+                year:"",
+                studio:"",
+                episodes:"",
+                tags: "",
+                score: "",
+                status: "",
+                native: "",
+                season: "",
+                public: "",
+            },
+            errors: []
         }
         this.pull = this.pull.bind(this);
         this.handleUpdates = this.handleUpdates.bind(this);
@@ -34,9 +40,10 @@ class Create extends Component {
 
     clear () {
         // let inputs = ['name','showid','url','promo','banner','description','year','studio','episodes','tags','score','status','native','season', 'public'];
-        for(let k in this.state) {
+        for(let k in this.state.show) {
             let item = document.getElementById(k);
             item.value = "";
+            this.setState({show:{name:"",showid:"",url:"",promo:"",banner:"",description: "",year:"",studio:"",episodes:"",tags: "",score: "",status: "",native: "",season: "",public: "",}})
         }
     }
 
@@ -48,25 +55,37 @@ class Create extends Component {
     }
 
     push () {
-        let showobj = this.state;
-        console.log(JSON.stringify(showobj));
+        let showobj = this.state.show;
+        this.setState({errors: []})
+        let showjson = JSON.stringify(showobj);
         let errors = validate(showobj);
         if(errors.length) {
-            console.log(errors);
+            // console.log(errors);
+            this.setState({ errors });
         } else {
-            console.log("CLEAR FOR LIFTOFF")
+            console.log("CLEAR FOR LIFTOFF");
+            Axios.post('http://localhost:3001/update/', {showid: this.state.show.showid, showjson: showjson})
+            .then((respose) => {
+                console.log("UPDATED");
+            }).catch(err => {
+                console.log("error on update: ", err);
+            })
         }
     }
 
     pull () {
-        let showid = this.state.showid;
+        let showid = this.state.show.showid;
         if(showid) {
             Axios.post(`http://localhost:3001/customquery/`, { value: `SELECT * FROM shows WHERE showid = '${showid}';` })
             .then(response => {
                 let showobj = JSON.parse(response.data.data[0].showjson);
-                this.setState(showobj, () => {
-                    this.setAttributes(showobj);
-                });
+                this.setAttributes(showobj);
+                let state = this.state;
+                for(let k in showobj) {
+                    state.show[k] = showobj[k];
+                }
+                this.setState(state);
+                
             }).catch(err => {
                 console.log("error talking to DB: ", err);
             })
@@ -74,9 +93,12 @@ class Create extends Component {
     }
 
     handleUpdates (event) {
-        let value = { [event.target.id]: event.target.value }
-        this.setState(value , () => {
-            // console.log(this.state)
+        let key = event.target.id;
+        let value = event.target.value;
+        let state = this.state;
+        state.show[key] = value;
+        this.setState(state , () => {
+            console.log(value, "state: ", this.state)
         });
     }
 
@@ -85,6 +107,9 @@ class Create extends Component {
             <div className="create-wrapper">
                 <p className="desc">Please Input Information to make new show</p>
                 <p className="desc"><span className="orange">red</span> colored inputs cannot be left blank</p>
+                <Break />
+                <LiveString showobj={this.state.show} />
+                <Break />
                 <div className="inputs-wrapper">
                     <div className="pair-wrapper">
                         <input className="create-input not-blank" id="name" type={"text"} onKeyUp={this.handleUpdates} placeholder={"name"}></input>
@@ -147,11 +172,13 @@ class Create extends Component {
                         <p className="input-description">true or false, will disable the show from being shown if false</p>
                     </div>
                 </div>
+                <Break />
                 <div className="controls-wrapper">
                     <div className="button-wrapper"><button className="btn pull" onClick={this.pull}>pull</button></div>
                     <div className="button-wrapper"><button className="btn push" onClick={this.push}>push</button></div>
                     <div className="button-wrapper"><button className="btn clear" onClick={this.clear}>clear</button></div>
                 </div>
+                <ErrorPopUp errors={this.state.errors} />
             </div>
         )
     }

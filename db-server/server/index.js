@@ -7,9 +7,15 @@ let app = express();
 let selectAll = require("./queries/SelectAll");
 let customQuery = require("./queries/CustomQuery");
 let search = require("./queries/search");
+let update = require("./queries/update");
 
 app.use(cors())
 app.use(bp())
+
+app.post("/update", (req, res) => {
+    console.log("\nUPDATE:\n")
+    update(req, res);
+})
 
 app.post("/search", (req, res) => {
     search(req, res);

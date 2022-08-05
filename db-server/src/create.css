@@ -23,7 +23,7 @@
 }
 
 .not-blank {
-    border: 2px solid red;
+    border: 2px solid rgb(201, 64, 64);
 }
 
 .input-description {
@@ -36,11 +36,11 @@
 }
 
 .not-blank::placeholder {
-    color: red;
+    color: rgb(201, 64, 64);
 }
 
 .orange {
-    color: red;
+    color: rgb(201, 64, 64);
 }
 
 .desc {
@@ -71,4 +71,37 @@
 
 .push {
     color: blue;
+}
+
+.error-item {
+    color: white;
+}
+
+.livestring-wrapper {
+    background-color: black;
+    height: 100px;
+    width: 70%;
+    margin-left: 15%;
+    border: 2px solid rgb(53, 255, 53);
+    padding: 3px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.livestring-wrapper::-webkit-scrollbar {
+    width: 0px;
+    
+}
+
+.livestring {
+    color: rgb(53, 255, 53);
+    font-family: 'Roboto Mono', monospace;
+    overflow-wrap: break-word;
+    font-size: 12px;
+    padding: 3px;
+    margin: 1px;
+}
+
+.special {
+    color: white;
 }
