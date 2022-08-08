@@ -13,6 +13,7 @@ function update (req, res) {
             if(err) {console.log("Database Error in UPDATE", err); client.end(); res.status(500).send()}
             // console.log(response)
             else {
+                client.end();
                 res.status(200);;
             }
         });
