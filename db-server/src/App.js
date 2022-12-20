@@ -30,7 +30,7 @@ class App extends Component {
   render () {
     return (
       <div className="App">
-        <h1>Steve's Super Duper Database Machine</h1>
+        <h1 className='title'>Steve's Super Duper Database Machine</h1>
         <DisplayArea styles={this.state.displayStyles} data={this.state.displayString}/>
         <SelectAll updateState={this.updateState}/>
         <Break />

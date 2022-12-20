@@ -98,7 +98,7 @@ class Create extends Component {
         let state = this.state;
         state.show[key] = value;
         this.setState(state , () => {
-            console.log(value, "state: ", this.state)
+            
         });
     }
 

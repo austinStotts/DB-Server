@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Create from './CreateShow/Create';
+import Login from './googleLogin/login';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,6 +15,12 @@ if(l.pathname === "/create") {
       <Create />
     </React.StrictMode>
   );
+} else if (l.pathname === "/login") {
+  root.render(
+    <React.StrictMode>
+      <Login />
+    </React.StrictMode>
+  )
 } else {
   root.render(
     <React.StrictMode>
