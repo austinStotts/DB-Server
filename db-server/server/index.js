@@ -12,6 +12,8 @@ let update = require("./queries/update");
 app.use(cors())
 app.use(bp())
 
+// app.use(express.static("build"))
+
 app.post("/update", (req, res) => {
     console.log("\nUPDATE:\n")
     update(req, res);
@@ -30,9 +32,12 @@ app.get("/selectall", (req, res) => {
 })
 
 app.get("/", (req, res) => {
-    res.status(200).json({"hello": "*waves*"})
+    res.send("hello :3");
 })
 
+// app.get("/create", (req, res) => {
+//     res.sendFile(__dirname + "../build")
+// })
 
 
 app.listen(3001, () => {
