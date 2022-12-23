@@ -64,7 +64,7 @@ class Create extends Component {
             this.setState({ errors });
         } else {
             console.log("CLEAR FOR LIFTOFF");
-            Axios.post('http://localhost:3001/update/', {showid: this.state.show.showid, showjson: showjson})
+            Axios.post('http://54.147.237.223:3001/update/', {showid: this.state.show.showid, showjson: showjson})
             .then((respose) => {
                 console.log("UPDATED");
             }).catch(err => {
@@ -76,7 +76,7 @@ class Create extends Component {
     pull () {
         let showid = this.state.show.showid;
         if(showid) {
-            Axios.post(`http://localhost:3001/customquery/`, { value: `SELECT * FROM shows WHERE showid = '${showid}';` })
+            Axios.post(`http://54.147.237.223:3001/customquery/`, { value: `SELECT * FROM shows WHERE showid = '${showid}';` })
             .then(response => {
                 let showobj = JSON.parse(response.data.data[0].showjson);
                 this.setAttributes(showobj);

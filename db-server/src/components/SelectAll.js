@@ -3,7 +3,7 @@ import Axios from "axios";
 // import beautify from "json-beautify";
 
 const handleRequest = (props) => {
-    Axios.get("http://localhost:3001/selectall")
+    Axios.get("http://54.147.237.223:3001/selectall")
     .then(response => {
         // console.log("RESPONSE ->>>",response.data);
         let s = JSON.stringify(response.data.data);

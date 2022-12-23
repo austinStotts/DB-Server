@@ -7,7 +7,7 @@ const handleRequest = (props) => {
     value = value.toLowerCase();
     value = value.split(" ").join("_");
     console.log("VALUE: ", value)
-    Axios.post("http://localhost:3001/search", { value })
+    Axios.post("http://54.147.237.223:3001/search", { value })
     .then(response => {
         // console.log("RESPONSE ->>>",response.data);
         let s = JSON.stringify(response.data);
